@@ -1,0 +1,19 @@
+<form>
+    
+    <!-- open-email-field -->
+    <input type="email" placeholder="email" name="email" [(ngModel)]="authModel.email" [formControl]="email" required>
+    <span *ngIf="submitted && email.invalid"> {{ getErrorsEmail() }} </span>
+    <!-- close-email-field -->
+    
+    <!-- open-password-field -->
+    <input type="password" placeholder="password" name="password" [(ngModel)]="authModel.password" [formControl]="password" required>
+    <span *ngIf="submitted && password.invalid"> {{ getErrorsPassword() }} </span>
+    <!-- close-password-field -->
+    
+    <!-- open-submit-field -->
+    <input type="submit" (click)="login()" value="Log In">
+    <!-- close-submit-field -->
+    
+</form>
+
+<a routerLink="/auth/signup">No tengo cuenta</a>
