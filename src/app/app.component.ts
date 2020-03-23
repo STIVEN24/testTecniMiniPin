@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavigationStart, NavigationEnd, Router, Event } from '@angular/router';
 
 // --- open-services --- /
 import { AuthService } from './shared/services/auth.service';
@@ -11,8 +12,23 @@ import { AuthService } from './shared/services/auth.service';
 })
 export class AppComponent {
 
+  showSpinnerLoading: boolean;
+
   constructor(
-    private authService: AuthService
-  ) { }
+    private router: Router
+  ) {
+    this.showSpinnerLoading = true;
+
+    this.router.events.subscribe((routerEvent: Event) => {
+      if (routerEvent instanceof NavigationStart) {
+        this.showSpinnerLoading = true;
+      }
+      if (routerEvent instanceof NavigationEnd) {
+        setTimeout(() => {
+          this.showSpinnerLoading = false;
+        }, 1000);
+      }
+    });
+  }
 
 }

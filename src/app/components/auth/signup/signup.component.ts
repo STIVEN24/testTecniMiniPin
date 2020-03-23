@@ -27,6 +27,7 @@ export class SignupComponent implements OnInit {
     password: '',
     description: '',
     birth: '',
+    photoURL: ''
   }
 
   submitted: boolean;

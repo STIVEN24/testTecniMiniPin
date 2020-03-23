@@ -1,5 +1,8 @@
 <p>nav works!</p>
 
+<a routerLink="/">Home</a>
+
 <a *ngIf="!isAuth" routerLink="/auth/login">Log In</a>
 <a *ngIf="!isAuth" routerLink="/auth/signup">Sign Up</a>
+
 <button *ngIf="isAuth" (click)="logout()">Log Out</button>

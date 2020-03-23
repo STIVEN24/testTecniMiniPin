@@ -1,0 +1,26 @@
+<form>
+
+    <!-- open-email-field -->
+    <textarea
+        type="text"
+        name="description"
+        id=""
+        placeholder="Piensas en algo?, ¡postéalo!"
+        cols="30"
+        rows="10"
+        [(ngModel)]="postModel.description"
+        [formControl]="description"
+    ></textarea>
+    <span
+    *ngIf="submitted && description.invalid"
+    > {{ getErrorsDescription() }} </span>
+    <!-- close-email-field -->
+
+    <!-- open-submit-field -->
+    <input
+        type="submit"
+        [value]="isAuth ? 'Publish' : 'Sign Up' "
+        (click)="isAuth ? createPost() : gotToLogin()">
+    <!-- close-submit-field -->
+    
+</form>

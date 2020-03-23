@@ -10,6 +10,14 @@ import { SignupComponent } from '../components/auth/signup/signup.component';
 import { ProfileComponent } from '../components/client/account/profile/profile.component';
 // close-auth //
 
+// open-posts //
+import { NewPostComponent } from '../components/client/pages/posts/new-post/new-post.component';
+// close-posts //
+
+// open-not-found-page //
+import { NotFoundPageComponent } from '../components/client/pages/not-found-page/not-found-page.component';
+// close-not-found-page //
+
 // --- close-components --- //
 
 // --- open-guards --- //
@@ -27,8 +35,16 @@ const routes: Routes = [
   // close-auth //
 
   // open-account //
-  { path: 'account/profile', component: ProfileComponent, canActivate: [AuthGuard] }
+  { path: 'account/profile', component: ProfileComponent, canActivate: [AuthGuard] },
   // close-account //
+  
+  // open-posts //
+  // close-post //
+  
+  // open-redirect //
+  { path: '**', component: NotFoundPageComponent }
+  // close-redirect //
+
 
 ];
 

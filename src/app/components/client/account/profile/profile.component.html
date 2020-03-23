@@ -36,13 +36,20 @@
     <span *ngIf="submitted && password.invalid"> {{ getErrorsPassword() }} </span> -->
     <!-- close-password-field -->
 
-    <!-- open-password-field -->
+    <!-- open-description-field -->
+    <textarea type="text" name="description" placeholder="Description" id="description" cols="30" rows="10" [(ngModel)]="authModel.description"></textarea>
+    <!-- close-description-field -->
+    
+    <!-- open-birth-field -->
     <input type="date" placeholder="birth" name="birth" [(ngModel)]="authModel.birth" [formControl]="birth" required>
     <span *ngIf="submitted && birth.invalid"> {{ getErrorsBirth() }} </span>
-    <!-- close-password-field -->
+    <!-- close-birth-field -->
 
     <!-- open-submit-field -->
     <input type="submit" (click)="update()" value="Update">
     <!-- close-submit-field -->
 
 </form>
+
+
+<app-my-posts></app-my-posts>

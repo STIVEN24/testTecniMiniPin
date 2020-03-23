@@ -18,10 +18,8 @@ import { File } from '../models/file.model';
 })
 export class AuthService {
 
-  public auxAuthLogged: boolean;
-
+  // declare variables
   public userData: Observable<firebase.User>;
-
   private filePath: string
 
   constructor(
@@ -49,6 +47,7 @@ export class AuthService {
 
   // --- open-signup --- //
   signup(data: any) {
+
     // open-create-user //
     return new Promise((resolve, reject) => {
       this.angularFireAuth.auth.createUserWithEmailAndPassword(data.email, data.password)
@@ -60,8 +59,9 @@ export class AuthService {
             lastname: this.capitalize(data.lastname),
             birth: data.birth,
             description: data.description,
-            photo: data.photo
+            photoURL: data.photoURL
           })
+          this.router.navigate(['/account/profile']);
           resolve(res)
         })
         .catch(err => reject(err))
@@ -105,7 +105,7 @@ export class AuthService {
             console.log("document no encontrado");
             return false;
           } else {
-            console.log();
+            console.log("User updated");
             this.angularFirestore.collection('users').doc(user.uid).update(user);
             this.angularFireAuth.auth.currentUser.updateProfile(
               {

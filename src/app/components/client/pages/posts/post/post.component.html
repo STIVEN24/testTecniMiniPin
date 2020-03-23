@@ -1,0 +1,23 @@
+<ul>
+    <li *ngFor="let post of posts">
+        <img [ngStyle]=" { 
+            'background-image': 'url('+ post.user.photoURL +')',
+            'width': '200px', 'height': '200px',
+            'background-size': 'cover', 'background-position' : 'center'  } ">
+        <p>
+            <b> Name </b> : {{ post.user.name }}
+            <b> Lastname </b> : {{ post.user.lastname }}
+        </p>
+        <p>
+            <b>
+                {{ post.description }}
+            </b>
+        </p>
+        <p>
+            <b>
+                {{ post.created_at.toDate() | date : 'medium' }}
+            </b>
+        </p>
+    </li>
+
+</ul>

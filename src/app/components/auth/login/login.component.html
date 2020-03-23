@@ -1,19 +1,47 @@
-<form>
-    
-    <!-- open-email-field -->
+<!-- <form>
     <input type="email" placeholder="email" name="email" [(ngModel)]="authModel.email" [formControl]="email" required>
     <span *ngIf="submitted && email.invalid"> {{ getErrorsEmail() }} </span>
-    <!-- close-email-field -->
-    
-    <!-- open-password-field -->
-    <input type="password" placeholder="password" name="password" [(ngModel)]="authModel.password" [formControl]="password" required>
+
+
+    <input type="password" placeholder="password" name="password" [(ngModel)]="authModel.password"
+        [formControl]="password" required>
     <span *ngIf="submitted && password.invalid"> {{ getErrorsPassword() }} </span>
+</form> -->
+
+<form>
+
+    <!-- open-email-field -->
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input autocomplete="off" type="email" matInput [formControl]="email" placeholder="example@domain.com"
+            [(ngModel)]="authModel.email">
+        <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+            Ingresa por favor un correo valio, por ejemplo: example@domain.com
+        </mat-error>
+        <mat-error *ngIf="email.hasError('required')">
+            Email is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <!-- close-email-field -->
+
+    <!-- open-password-field -->
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input autocomplete="off" type="password" matInput [formControl]="password" [(ngModel)]="authModel.password">
+        <mat-error *ngIf="password.hasError('minLength') && !password.hasError('required')">
+            minLength is of 6
+        </mat-error>
+        <mat-error *ngIf="email.hasError('required')">
+            Email is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
     <!-- close-password-field -->
-    
+
     <!-- open-submit-field -->
-    <input type="submit" (click)="login()" value="Log In">
+    <button type="submit" mat-flat-button color="primary" (click)="login()">Log In</button>
     <!-- close-submit-field -->
-    
+
 </form>
 
 <a routerLink="/auth/signup">No tengo cuenta</a>

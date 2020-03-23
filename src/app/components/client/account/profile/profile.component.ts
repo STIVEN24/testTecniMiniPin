@@ -80,6 +80,7 @@ export class ProfileComponent implements OnInit {
         this.authModel.lastname = res.lastname;
         this.authModel.birth = res.birth;
         this.authModel.photoURL = res.photoURL;
+        this.authModel.description = res.description;
       })
       .catch(err => console.log(err));
   }
