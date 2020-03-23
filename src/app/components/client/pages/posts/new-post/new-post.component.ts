@@ -3,7 +3,6 @@ import { FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
 // --- open-firebase --- //
-import { AngularFirestore } from '@angular/fire/firestore';
 // --- close-firebase --- //
 
 // --- open-models --- //
@@ -44,7 +43,6 @@ export class NewPostComponent implements OnInit {
   constructor(
     private postService: PostService,
     private authService: AuthService,
-    private angularFirestore: AngularFirestore,
     private router: Router,
   ) { }
 
@@ -69,10 +67,14 @@ export class NewPostComponent implements OnInit {
 
   // open-create-post //
   createPost() {
-    this.submitted = true;
-    if (this.description.invalid) return;
 
-    this.postService.createPost(this.postModel);
+    if (this.postModel.description.length === 0 || this.postModel.description === '') return
+
+    this.postService.createPost(this.postModel)
+
+    setTimeout(() => {
+      this.postModel.description = "";
+    }, 2000);
 
   }
   // close-create-post //

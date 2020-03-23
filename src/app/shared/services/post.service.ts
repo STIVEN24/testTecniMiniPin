@@ -8,7 +8,6 @@ import { AngularFirestore } from "@angular/fire/firestore";
 
 // --- open-models --- //
 import { Post } from '../models/post.model';
-import { Auth } from '../models/auth.model';
 // --- close-models --- //
 
 // --- open-services --- //
@@ -27,19 +26,17 @@ export class PostService {
 
   // open-create-post //
   createPost(post: Post) {
+    if (post.description == "" || post.description.length === 0) return false;
     this.authService.userData.subscribe(
-      user => {
-        this.authService.getUser(user.uid)
+      userAuth => {
+        this.authService.getUser(userAuth.uid)
           .then(
             (user: any) => {
               this.angularFirestore.collection('posts').add(
                 {
                   user: {
-                    uid: user.uid,
-                    email: user.email,
-                    name: user.name,
-                    lastname: user.lastname,
-                    photoURL: user.photoURL
+                    uid: userAuth.uid,
+                    email: userAuth.email
                   },
                   created_at: post.created_at,
                   description: post.description,
@@ -49,24 +46,40 @@ export class PostService {
                   ]
                 }
               ).then(ref => {
-                console.log(ref.id);
+                return ref.id;
               })
             }
           )
           .catch(err => console.log(err));
       }
     );
+
   }
   // close-create-post //
 
   // open-get-post //
   getPosts() {
 
-    return this.angularFirestore.collection('posts', ref => ref.orderBy('created_at', 'desc')).valueChanges().pipe(
-      map((arr: any) => {
-        return arr
-      })
-    )
+    return this.angularFirestore.collection('posts', ref => ref.orderBy('created_at', 'desc')).snapshotChanges()
+      .pipe(
+        map(
+          posts => {
+            return posts.map(a => {
+              return a;
+            })
+          }
+        )
+      )
+    // return this.angularFirestore.collection('posts', ref => ref.orderBy('created_at', 'desc')).valueChanges().pipe(
+    //   map((arr: any) => {
+    //     return arr
+    //   })
+    // )
   }
   // close-get-post //
+
+  deletePost(idPost: string) {
+    return this.angularFirestore.collection('posts').doc(idPost).delete();
+  }
+
 }

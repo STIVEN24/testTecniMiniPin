@@ -1,26 +1,25 @@
-<form>
+<mat-card>
 
-    <!-- open-email-field -->
-    <textarea
-        type="text"
-        name="description"
-        id=""
-        placeholder="Piensas en algo?, ¡postéalo!"
-        cols="30"
-        rows="10"
-        [(ngModel)]="postModel.description"
-        [formControl]="description"
-    ></textarea>
-    <span
-    *ngIf="submitted && description.invalid"
-    > {{ getErrorsDescription() }} </span>
-    <!-- close-email-field -->
+    <form>
 
-    <!-- open-submit-field -->
-    <input
-        type="submit"
-        [value]="isAuth ? 'Publish' : 'Sign Up' "
-        (click)="isAuth ? createPost() : gotToLogin()">
-    <!-- close-submit-field -->
-    
-</form>
+        <!-- open-description-field -->
+        <mat-form-field>
+            <mat-label>
+                {{ isAuth ? 'Piensas en algo?, ¡postéalo!' : 'Piensas en algo?, ¡Registrate!'  }}
+            </mat-label>
+            <textarea type="text" matInput [(ngModel)]="postModel.description" name="description"></textarea>
+        </mat-form-field>
+        <!-- close-description-field -->
+
+    </form>
+
+    <mat-card-actions>
+
+        <!-- open-submit-field -->
+        <button mat-button (click)="isAuth ? createPost() : gotToLogin()" type="submit" color="primary"
+            mat-flat-button>{{ isAuth ? 'Publish' : 'Sign Up' }} </button>
+        <!-- close-submit-field -->
+
+    </mat-card-actions>
+
+</mat-card>

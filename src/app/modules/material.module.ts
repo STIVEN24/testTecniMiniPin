@@ -4,6 +4,11 @@ import {
     MatFormFieldModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
+    
 } from "@angular/material";
 
 @NgModule({
@@ -12,6 +17,11 @@ import {
         MatFormFieldModule,
         MatButtonModule,
         MatProgressSpinnerModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatIconModule,
+
     ]
 })
 

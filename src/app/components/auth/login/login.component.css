@@ -1,0 +1,52 @@
+.wrapper-form-login {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+}
+
+.wrapper-form-login .svg-login svg {
+    width: 400px;
+}
+
+.wrapper-form-login .form-login {
+    position: relative;
+    width: auto;
+    padding: 2em;
+}
+
+.wrapper-form-login .form-login .content-form-login form {
+    display: flex;
+    width: 400px;
+    flex-direction: column;
+}
+
+.wrapper-form-login .form-login .content-form-login form mat-form-field {
+    padding-bottom: 1em
+}
+
+.wrapper-form-login .form-login .content-form-login form button {
+    margin: auto;
+}
+
+.wrapper-form-login .form-login .content-form-login::before {
+    position: absolute;
+    content: '';
+    width: 600px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 4px;
+    border: 1px solid var(--bg-color-primary);
+    z-index: -1;
+}
+
+.a-link-signup {
+    text-align: center;
+    padding: 2em 0 0 0;
+}
+.a-link-signup > a {
+    color: #000;
+}

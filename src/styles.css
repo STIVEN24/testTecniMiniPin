@@ -1,10 +1,29 @@
+/* --- open-global-variables --- */
+
+:root {
+    --bg-color-primary: #0288D1;
+    --bg-color-white: #fff
+}
+
+/* --- close-global-variables --- */
+
+/* --- open-global --- */
+
+/* --- close-global --- */
+
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+    user-select: none;
 }
+
+html, body {
+    height: 100%;
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+    font-size: 20px;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
-import { isNullOrUndefined } from 'util';
 
 // --- open-firebase --- //
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -47,7 +46,6 @@ export class AuthService {
 
   // --- open-signup --- //
   signup(data: any) {
-
     // open-create-user //
     return new Promise((resolve, reject) => {
       this.angularFireAuth.auth.createUserWithEmailAndPassword(data.email, data.password)

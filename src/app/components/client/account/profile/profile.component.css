@@ -1,5 +1,43 @@
-/* --- open-avatar-profile --- */
-.avatar-profile {
-    background: #ccc;
+mat-card {
+    box-shadow:
+        0 2px 3px -1px rgba(0, 0, 0, 2),
+        0 1px 3px 0 rgba(0, 0, 0, .14),
+        0 5px 10px 0 rgba(0, 0, 0, .5) !important;
+    margin-top: 10em;
+    position: relative;
 }
-/* --- close-avatar-profile --- */
+
+mat-card form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+mat-card form .form-fields-profile {
+    padding-top: 10em;
+    width: 500px;
+}
+
+.img-profile-pic-svg {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--bg-color-primary);
+    border-radius: 50%;
+    background: #fff;
+    box-shadow:
+        0 2px 3px -1px rgba(0, 0, 0, 2),
+        0 1px 3px 0 rgba(0, 0, 0, .14),
+        0 5px 10px 0 rgba(0, 0, 0, .5) !important;
+}
+
+.img-profile-pic-svg svg {
+    width: 300px;
+    height: 300px;
+}
+
+mat-card .form-fields-profile mat-form-field {
+    width: 100%
+}

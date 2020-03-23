@@ -1,0 +1,52 @@
+.wrapper-form-signup {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+}
+
+.wrapper-form-signup .svg-signup svg {
+    width: 500px;
+}
+
+.wrapper-form-signup .form-signup {
+    position: relative;
+    width: auto;
+    padding: 4em 2em;
+}
+
+.wrapper-form-signup .form-signup .content-form-signup form {
+    display: flex;
+    width: 400px;
+    flex-direction: column;
+}
+
+.wrapper-form-signup .form-signup .content-form-signup form mat-form-field, input[type="date"] {
+    margin-bottom: 1em
+}
+
+.wrapper-form-signup .form-signup .content-form-signup form button {
+    margin: auto;
+}
+
+.wrapper-form-signup .form-signup .content-form-signup::before {
+    position: absolute;
+    content: '';
+    width: 600px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 4px;
+    border: 1px solid var(--bg-color-primary);
+    z-index: -1;
+}
+
+.a-link-login {
+    text-align: center;
+    padding: 2em 0 0 0;
+}
+.a-link-login > a {
+    color: #000;
+}

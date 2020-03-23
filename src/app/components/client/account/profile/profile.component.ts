@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
     photoURL: ''
   }
 
+  public booleanImgProfileValidate: boolean;
   public image: File;
   public currentImage = 'https://firebasestorage.googleapis.com/v0/b/minipin.appspot.com/o/media%2Fimg%2Fauth%2Fupload-img-profile.png?alt=media&token=6c40989e-73c4-44e0-911d-8f89a044e384';
 
@@ -47,20 +48,12 @@ export class ProfileComponent implements OnInit {
   }
 
   // open-eclaring-fields //
-  name = new FormControl('', [Validators.required]);
+  name = new FormControl('', [Validators.required, Validators.minLength(3)]);
   lastname = new FormControl('', [Validators.required]);
   email = new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email]);
   // password = new FormControl('', [Validators.required, Validators.minLength(6)]);
   birth = new FormControl({ value: '', disabled: true }, [Validators.required]);
   // close-declaring-fields //
-
-  // open-declaring-fields-validators //
-  getErrorsName() { return this.name.hasError('required') ? 'Name Required' : ''; }
-  getErrorsLastname() { return this.lastname.hasError('required') ? 'Lastname Required' : ''; }
-  getErrorsEmail() { return this.email.hasError('required') ? 'Email Required' : this.email.hasError('email') ? 'Email invalid' : ''; }
-  // getErrorsPassword() { return this.password.hasError('required') ? 'Password Required' : this.password.hasError('minLength') ? 'minLength 6' : ''; }
-  getErrorsBirth() { return this.birth.hasError('required') ? 'Birth Required' : ''; }
-  // close-declaring-fields-validators //
 
   // open-update-profile //
   update() {
@@ -71,7 +64,10 @@ export class ProfileComponent implements OnInit {
   // --- open-init-load-form-profile ---
   private initFormForUpdate(user) {
     if (user.photoURL) {
+      this.booleanImgProfileValidate = true;
       this.currentImage = user.photoURL
+    } else {
+      this.booleanImgProfileValidate = false;
     }
     this.authModel.email = user.email;
     this.authService.getUser(user.uid).then(

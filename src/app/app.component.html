@@ -1,7 +1,12 @@
 <app-nav></app-nav>
 
-<mat-spinner *ngIf="showSpinnerLoading"></mat-spinner>
-
-<router-outlet></router-outlet>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
 
 <app-footer></app-footer>
+
+
+<div class="overlay-mat-spinner" *ngIf="showSpinnerLoading">
+    <mat-spinner *ngIf="showSpinnerLoading"></mat-spinner>
+</div>
