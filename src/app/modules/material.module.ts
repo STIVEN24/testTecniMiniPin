@@ -8,6 +8,10 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatDividerModule,
+    MatTooltipModule
     
 } from "@angular/material";
 
@@ -21,7 +25,10 @@ import {
         MatDatepickerModule,
         MatNativeDateModule,
         MatIconModule,
-
+        MatToolbarModule,
+        MatMenuModule,
+        MatDividerModule,
+        MatTooltipModule
     ]
 })
 

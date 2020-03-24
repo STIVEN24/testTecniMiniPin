@@ -22,6 +22,8 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class NewPostComponent implements OnInit {
 
   public isAuth: boolean;
+  public photoURL: string;
+  public name: string;
 
   submitted: boolean;
 
@@ -52,14 +54,26 @@ export class NewPostComponent implements OnInit {
 
   getCurrentAuth() {
     this.authService.isAuth().subscribe(
-      auth => {
+      (auth: any) => {
         if (auth) {
           this.isAuth = true;
+          this.getUser(auth.uid);
         } else {
           this.isAuth = false;
         }
       }
     )
+  }
+
+  getUser(userId: string) {
+
+    this.authService.getUser(userId)
+      .then((res: any) => {
+        this.photoURL = res.photoURL;
+        this.name= res.name;
+      })
+      .catch(err => console.log(err))
+
   }
 
   description = new FormControl('', [Validators.required]);
@@ -71,16 +85,20 @@ export class NewPostComponent implements OnInit {
     if (this.postModel.description.length === 0 || this.postModel.description === '') return
 
     this.postService.createPost(this.postModel)
+      .then(res => {
+        this.postModel.description = "";
+      })
+      .catch(err => console.log(err))
 
     setTimeout(() => {
-      this.postModel.description = "";
+
     }, 2000);
 
   }
   // close-create-post //
 
   gotToLogin() {
-    this.router.navigate(['/auth/signup']);
+    this.router.navigate(['/auth/login']);
   }
 
 }

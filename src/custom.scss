@@ -4,7 +4,8 @@
 // --- open-my-typography --- //
 $custom-typography: mat-typography-config(
     $font-family: 'Roboto, monospace',
-    $button: mat-typography-level(20px, 50px, 500), 
+    $button: mat-typography-level(20px, 50px, 500),
+    $body-1: mat-typography-level(20px)
 );
 // *** information *** //
 // $button : first parameter: font-size, second parameter: line-height, three parameter: weight

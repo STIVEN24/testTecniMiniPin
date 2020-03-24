@@ -24,9 +24,7 @@ export class AppComponent {
         this.showSpinnerLoading = true;
       }
       if (routerEvent instanceof NavigationEnd) {
-        setTimeout(() => {
           this.showSpinnerLoading = false;
-        }, 1000);
       }
     });
   }

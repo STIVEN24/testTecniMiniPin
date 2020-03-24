@@ -1,22 +1,31 @@
 mat-card {
-    box-shadow:
-        0 2px 3px -1px rgba(0, 0, 0, .2),
-        0 1px 3px 0 rgba(0, 0, 0, .14),
-        0 5px 10px 0 rgba(0, 0, 0, .5) !important;
+    box-shadow: 0 2px 3px -1px rgba(0, 0, 0, .2), 0 1px 3px 0 rgba(0, 0, 0, .14), 0 5px 10px 0 rgba(0, 0, 0, .5) !important;
+    margin-bottom: 3em;
 }
 
 mat-card form {
     display: flex;
     flex-direction: row;
-
     align-items: center;
-    
-    /* justify-content: center; */
 }
+
 mat-card form mat-form-field {
     width: 100%;
 }
 
 mat-card form button {
-    margin: auto
+    margin: auto 1em;
+}
+
+mat-card form>.mat-card-img {
+    margin-right: 1em
+}
+
+mat-card form>.mat-card-img>div>svg {
+    width: 80px;
+    height: 80px;
+}
+
+button {
+    width: 200px !important
 }

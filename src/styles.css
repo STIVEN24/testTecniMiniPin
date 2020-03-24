@@ -8,7 +8,9 @@
 /* --- close-global-variables --- */
 
 /* --- open-global --- */
-
+.material-icons {
+    font-size: 30px !important;
+}
 /* --- close-global --- */
 
 * {

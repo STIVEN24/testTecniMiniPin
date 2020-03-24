@@ -4,8 +4,20 @@ mat-card {
 }
 
 mat-card mat-card-header>div>svg {
-    width: 112px;
-    height: 112px;
+    width: 80px;
+    height: 80px;
+}
+
+mat-card mat-card-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 1em 0;
+}
+
+mat-card mat-card-content {
+    padding: 2em !important;
+    margin-bottom: 0 !important
 }
 
 mat-card mat-card-footer {
@@ -15,6 +27,7 @@ mat-card mat-card-footer {
 .mat-list-container {
     position: relative;
 }
+
 .mat-spinner-load-posts {
     transition: all 1s;
     position: absolute;
@@ -22,12 +35,27 @@ mat-card mat-card-footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 0; bottom: 0; left: 0; bottom: 0; right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     background: #fff;
     opacity: 0;
     visibility: hidden;
 }
+
 .mat-spinner-load-posts.active {
     opacity: 1;
     visibility: visible;
+}
+
+mat-card-actions {
+    display: flex;
+    align-items: center;
+    margin: 1em !important;
+}
+
+mat-card-actions span {
+    margin: 0 1em
 }

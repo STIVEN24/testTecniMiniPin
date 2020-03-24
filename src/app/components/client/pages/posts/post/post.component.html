@@ -1,17 +1,23 @@
 <div class="mat-list-container">
 
     <div class="mat-spinner-load-posts" [ngClass]="spinnerToggleLoadingPosts ? 'active' : '' ">
-        <mat-spinner ></mat-spinner>
+        <mat-spinner></mat-spinner>
     </div>
 
-    <mat-card *ngFor="let post of orderByDescPosts">
+    <mat-card *ngFor="let post of joined">
+
+        <!-- *ngIf="all$ | async; else loading; let all"
+
+        let post of all.posts
+
+        post.description -->
 
         <mat-card-header>
-            <img *ngIf="post.user.photoURL.length != 0" mat-card-avatar mat-card-md-image [ngStyle]=" { 
+            <img *ngIf="post.user.photoURL.length != 0" mat-card-avatar mat-card-sm-image [ngStyle]=" { 
                 'background-image': 'url('+ post.user.photoURL +')',
                 'background-size': 'cover', 'background-position' : 'center'  } ">
 
-            <div *ngIf="post.user.photoURL.length == 0" mat-card-avatar mat-card-md-image>
+            <div *ngIf="post.user.photoURL.length == 0" mat-card-avatar mat-card-sm-image>
                 <svg id="457bf273-24a3-4fd8-a857-e9b918267d6a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" width="698" height="698" viewBox="0 0 698 698">
                     <defs>
@@ -51,8 +57,18 @@
                     <ellipse cx="497.8" cy="372.3" rx="14.09" ry="26.42" fill="#fdb797" />
                 </svg>
             </div>
-            <mat-card-title>{{ post.user.name }} {{ post.user.lastname }}</mat-card-title>
-            <mat-card-subtitle>{{ post.user.email }}</mat-card-subtitle>
+
+            <mat-card-title>
+                <h3>
+                    {{ post.user.name }} {{ post.user.lastname }}
+                </h3>
+            </mat-card-title>
+            <mat-card-subtitle>
+                {{ post.user.email }}
+            </mat-card-subtitle>
+
+
+            <div style="flex: 1 1 auto">  </div>
 
             <div class="mat-card-header-actions" *ngIf=" authUserUid === post.user.uid ">
 
@@ -63,7 +79,7 @@
                     </mat-icon>
                 </button>
 
-                <button mat-icon-button class="mat-card-" color="warn" (click)="deletePost(post.id_post)">
+                <button mat-icon-button class="mat-card-" color="warn" (click)="deletePost(post.payload.doc.id)">
                     <mat-icon>
                         delete
                     </mat-icon>
@@ -74,24 +90,38 @@
 
 
         </mat-card-header>
+
+        <mat-divider></mat-divider>
+
         <mat-card-content>
             <p>
-                {{ post.description }}
+                {{ post.payload.doc.data().description }}
             </p>
         </mat-card-content>
+
+        <mat-divider></mat-divider>
         <mat-card-actions>
-            <p>
-                <button mat-icon-button color="warn">
+
+            <span>
+                <button mat-icon-button color="primary" matTooltip="Like" (click)="!isAuth ? gotToLogin() : '' " >
                     <mat-icon>
-                        favorite
+                        thumb_up
                     </mat-icon>
                 </button>
-                <b>{{ post.likes }}</b>
-            </p>
+                <b>{{ post.payload.doc.data().likes }}</b>
+            </span>
+            <span>
+                <button mat-icon-button color="primary"  matTooltip="Comments">
+                    <mat-icon>
+                        comment
+                    </mat-icon>
+                </button>
+                <b>{{ post.payload.doc.data().likes }}</b>
+            </span>
         </mat-card-actions>
-        <mat-card-footer>
-            {{ post.created_at.toDate() | date : 'medium' }}
-        </mat-card-footer>
+        <!-- <mat-card-footer>
+            {{ post.payload.doc.data().created_at.toDate() | date : 'medium' }}
+        </mat-card-footer> -->
 
     </mat-card>
 

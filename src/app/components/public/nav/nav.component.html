@@ -1,9 +1,38 @@
-<p>nav works!</p>
+<!-- <ul>
+    <li>
+        <button *ngIf="isAuth" (click)="logout()">Log Out</button>
+    </li>
+</ul> -->
+<mat-toolbar>
 
-<a routerLink="/">Home</a>
+    <mat-toolbar-row>
+        <h1 routerLink="/" style="cursor: pointer;">
+            App-Test-Tecnic
+        </h1>
+        <span class="example-spacer"></span>
+        <button *ngIf="!isAuth" mat-flat-button routerLink="/auth/login" color="primary">
+            Log In
+        </button>
+        <button *ngIf="!isAuth" mat-button routerLink="/auth/signup" color="primary">
+            Sign Up
+        </button>
+        <button *ngIf="isAuth" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon aria-label="Example thumbs up SVG icon" aria-hidden="false">
+                account_circle
+            </mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/account/profile">
+                Profile
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="logout()">
+                Log Out
 
-<a *ngIf="!isAuth" routerLink="/auth/login">Log In</a>
-<a *ngIf="!isAuth" routerLink="/auth/signup">Sign Up</a>
+            </button>
 
-<button *ngIf="isAuth" (click)="logout()">Log Out</button>
+        </mat-menu>
 
+    </mat-toolbar-row>
+
+</mat-toolbar>
