@@ -3,6 +3,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { Observable, combineLatest, of } from 'rxjs';
 import { uniq, flatten } from 'lodash'
 
+
 // --- open-firebase --- //
 import { AngularFirestore } from "@angular/fire/firestore";
 // --- close-firebase --- //
@@ -37,7 +38,7 @@ export class PostService {
         }
       }
     );
-    
+
   }
 
   // open-create-post //
@@ -56,8 +57,8 @@ export class PostService {
           { uid_user: '', message: '' }
         ]
       }
-    ).then(res => {return res})
-    .catch(err => console.log(err))
+    ).then(res => { return res })
+      .catch(err => console.log(err))
 
   }
   // close-create-post //
@@ -100,5 +101,28 @@ export class PostService {
     return this.angularFirestore.collection('posts').doc(idPost).delete();
   }
   // close-delete-post //
+
+  // --- open-update-description --- //
+  updatePost(id_post: string, description_post: string) {
+    return new Promise((resolve, reject) => {
+      this.angularFirestore.collection('posts')
+        .doc(id_post)
+        .update({ description: description_post })
+        .then(res => {
+          resolve(res)
+        })
+        .catch(err => reject(err))
+    })
+  }
+  // --- close-update-description --- //
+
+  // --- open-increment-likes --- //
+  updateLikes(id_post: string) {
+
+    console.log(id_post);
+
+  }
+  // --- close-increment-likes --- //
+
 
 }

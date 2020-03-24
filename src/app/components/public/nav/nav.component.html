@@ -11,10 +11,10 @@
         </h1>
         <span class="example-spacer"></span>
         <button *ngIf="!isAuth" mat-flat-button routerLink="/auth/login" color="primary">
-            Log In
+            Iniciar sesión
         </button>
         <button *ngIf="!isAuth" mat-button routerLink="/auth/signup" color="primary">
-            Sign Up
+            Registrarme
         </button>
         <button *ngIf="isAuth" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon aria-label="Example thumbs up SVG icon" aria-hidden="false">
@@ -23,12 +23,11 @@
         </button>
         <mat-menu #menu="matMenu">
             <button mat-menu-item routerLink="/account/profile">
-                Profile
+                Perfil
             </button>
             <mat-divider></mat-divider>
             <button mat-menu-item (click)="logout()">
-                Log Out
-
+                Cerrar sesión
             </button>
 
         </mat-menu>

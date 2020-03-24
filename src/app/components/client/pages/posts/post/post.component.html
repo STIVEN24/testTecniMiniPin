@@ -63,23 +63,26 @@
                     {{ post.user.name }} {{ post.user.lastname }}
                 </h3>
             </mat-card-title>
-            <mat-card-subtitle>
+            <mat-card-subtitle style="color: var(--bg-color-primary)">
                 {{ post.user.email }}
             </mat-card-subtitle>
 
 
-            <div style="flex: 1 1 auto">  </div>
+            <div style="flex: 1 1 auto"> </div>
 
             <div class="mat-card-header-actions" *ngIf=" authUserUid === post.user.uid ">
 
 
-                <button mat-icon-button class="mat-card-" color="accent">
+                <button mat-icon-button class="mat-card-" color="primary"
+                    (click)="openModalForUpdatePost(post.payload.doc.id, post.payload.doc.data().description)"
+                    matTooltip="Editar este post">
                     <mat-icon>
                         edit
                     </mat-icon>
                 </button>
 
-                <button mat-icon-button class="mat-card-" color="warn" (click)="deletePost(post.payload.doc.id)">
+                <button mat-icon-button class="mat-card-" color="warn" (click)="deletePost(post.payload.doc.id)"
+                    matTooltip="Eliminar este post">
                     <mat-icon>
                         delete
                     </mat-icon>
@@ -100,10 +103,12 @@
         </mat-card-content>
 
         <mat-divider></mat-divider>
-        <mat-card-actions>
 
+        <!-- open-likes-post -->
+        <mat-card-actions>
             <span>
-                <button mat-icon-button color="primary" matTooltip="Like" (click)="!isAuth ? gotToLogin() : '' " >
+                <button (click)="!isAuth ? gotToLogin() : updateLikes(post.payload.doc.id) " mat-icon-button
+                    matTooltip="Me gusta">
                     <mat-icon>
                         thumb_up
                     </mat-icon>
@@ -111,7 +116,7 @@
                 <b>{{ post.payload.doc.data().likes }}</b>
             </span>
             <span>
-                <button mat-icon-button color="primary"  matTooltip="Comments">
+                <button mat-icon-button matTooltip="Comentarios">
                     <mat-icon>
                         comment
                     </mat-icon>
@@ -119,6 +124,8 @@
                 <b>{{ post.payload.doc.data().likes }}</b>
             </span>
         </mat-card-actions>
+        <!-- close-likes-post -->
+
         <!-- <mat-card-footer>
             {{ post.payload.doc.data().created_at.toDate() | date : 'medium' }}
         </mat-card-footer> -->
@@ -126,3 +133,5 @@
     </mat-card>
 
 </div>
+
+<router-outlet></router-outlet>

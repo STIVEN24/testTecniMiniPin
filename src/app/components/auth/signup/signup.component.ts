@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 // --- open-others --- //
 import { FormControl, Validators } from '@angular/forms';
@@ -32,8 +33,11 @@ export class SignupComponent implements OnInit {
   submitted: boolean;
 
   constructor(
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private title: Title
+  ) {
+    this.title.setTitle("Registro - Mini-Twitter")
+  }
 
   ngOnInit() { }
 

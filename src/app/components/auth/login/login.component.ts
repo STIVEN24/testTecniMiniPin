@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 // --- open-others --- //
 import { FormControl, Validators } from '@angular/forms';
@@ -27,8 +28,11 @@ export class LoginComponent implements OnInit {
   submitted: boolean;
 
   constructor(
+    private title: Title,
     private authService: AuthService
-  ) { }
+  ) {
+    this.title.setTitle("Iniciar sesión - Mini-Twitter")
+  }
 
   ngOnInit() { }
 
@@ -48,9 +52,9 @@ export class LoginComponent implements OnInit {
     if (this.email.invalid) return;
     if (this.password.invalid) return;
 
-    this.authService.login(this.authModel).then( res => {
+    this.authService.login(this.authModel).then(res => {
       console.log("logging in");
-    } ).catch( err => window.alert("Email or password incorrect."));
+    }).catch(err => window.alert("Email or password incorrect."));
   }
   // close-login //
 

@@ -11,6 +11,7 @@ import { ProfileComponent } from '../components/client/account/profile/profile.c
 // close-auth //
 
 // open-posts //
+import { PostComponent } from '../components/client/pages/posts/post/post.component';
 import { NewPostComponent } from '../components/client/pages/posts/new-post/new-post.component';
 // close-posts //
 
@@ -37,10 +38,17 @@ const routes: Routes = [
   // open-account //
   { path: 'account/profile', component: ProfileComponent, canActivate: [AuthGuard] },
   // close-account //
-  
+
   // open-posts //
+  {
+    path: '',
+    component: PostComponent,
+    children: [
+      { path: 'post/update/:id_post', component: NewPostComponent }
+    ]
+  },
   // close-post //
-  
+
   // open-redirect //
   { path: '**', component: NotFoundPageComponent }
   // close-redirect //

@@ -59,3 +59,9 @@ mat-card-actions {
 mat-card-actions span {
     margin: 0 1em
 }
+
+.mat-card-header-actions button {
+
+    margin: 0 1em
+
+}

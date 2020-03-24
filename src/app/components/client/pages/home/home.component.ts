@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -12,8 +13,11 @@ export class HomeComponent implements OnInit {
   public isAuth: boolean;
 
   constructor(
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private title: Title
+  ) {
+    this.title.setTitle("Inicio - Mini-Twitter")
+  }
 
   ngOnInit() {
     this.getCurrentAuth();

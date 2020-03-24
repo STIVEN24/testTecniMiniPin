@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 // --- open-firebase --- //
 // --- close-firebase --- //
@@ -46,7 +46,16 @@ export class NewPostComponent implements OnInit {
     private postService: PostService,
     private authService: AuthService,
     private router: Router,
-  ) { }
+    private activatedRoute: ActivatedRoute,
+  ) {
+    this.activatedRoute.params.subscribe(
+      (param) => {
+        if (param['id_post']) {
+          console.log(param)
+        }
+      }
+    )
+  }
 
   ngOnInit() {
     this.getCurrentAuth();

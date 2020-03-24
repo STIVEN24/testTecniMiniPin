@@ -11,7 +11,8 @@ import {
     MatToolbarModule,
     MatMenuModule,
     MatDividerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
     
 } from "@angular/material";
 
@@ -28,7 +29,8 @@ import {
         MatToolbarModule,
         MatMenuModule,
         MatDividerModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatDialogModule
     ]
 })
 

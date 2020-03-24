@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavigationStart, NavigationEnd, Router, Event } from '@angular/router';
 
 // --- open-services --- /
-import { AuthService } from './shared/services/auth.service';
 // --- close-services --- /
 
 @Component({
@@ -24,7 +23,7 @@ export class AppComponent {
         this.showSpinnerLoading = true;
       }
       if (routerEvent instanceof NavigationEnd) {
-          this.showSpinnerLoading = false;
+        this.showSpinnerLoading = false;
       }
     });
   }

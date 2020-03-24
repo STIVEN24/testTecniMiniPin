@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { map, switchMap } from 'rxjs/operators';
 import { Observable, combineLatest, of } from 'rxjs';
 import { uniq, flatten } from 'lodash'
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 
 // --- open-services --- //
 import { PostService } from 'src/app/shared/services/post.service';
@@ -33,7 +34,8 @@ export class PostComponent implements OnInit {
   constructor(
     private postService: PostService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private matDialog: MatDialog
   ) {
     this.spinnerToggleLoadingPosts = false
   }
@@ -71,7 +73,7 @@ export class PostComponent implements OnInit {
       err => console.log(err)
     )
 
-    
+
 
     // this.angularFirestore.collection<Post>('posts', ref => ref.orderBy('created_at', 'desc')).snapshotChanges()
     //   .pipe(
@@ -190,5 +192,62 @@ export class PostComponent implements OnInit {
   }
   // --- close-got-to-login --- //
 
+  // --- open-open-modal-for-update-post --- //
+  openModalForUpdatePost(id_post: string, description_post: string) {
+    const dialogRef = this.matDialog.open(ModalUpdatePostComponent, {
+      data: { id_post: id_post, description_post: description_post }
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+  // --- open-open-modal-for-update-post --- //
+
+  // --- open-update-likes --- //
+  updateLikes(id_post: string) {    
+    this.postService.updateLikes(id_post);
+  }
+  // --- close-update-likes--- //
+
+}
+
+@Component({
+  styleUrls: ['./modal-update-post.component.css'],
+  templateUrl: './modal-update-post.component.html'
+})
+export class ModalUpdatePostComponent {
+
+  postModel: Post = {
+    description: ''
+  }
+
+  constructor(
+    private postService: PostService,
+    public dialogRef: MatDialogRef<ModalUpdatePostComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.postModel.description = this.data.description_post
+  }
+
+  updatePostOne() {
+
+    // console.log(this.data.id_post);
+    // console.log(this.postModel.description);
+
+    this.postService.updatePost(this.data.id_post, this.postModel.description)
+    .then(
+      res => console.log(res)
+    ).catch(err => console.log(err))
+
+    // this.postService.updatePost(this.data.id_post, this.postModel.description)
+    //   .then(res => {
+    //     console.log(res)
+    //   })
+    //   .catch(err => console.log(err))
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
 }

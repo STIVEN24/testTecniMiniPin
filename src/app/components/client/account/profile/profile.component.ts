@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 // --- open-others --- //
 import { FormControl, Validators } from '@angular/forms';
@@ -35,8 +36,11 @@ export class ProfileComponent implements OnInit {
   public currentImage = 'https://firebasestorage.googleapis.com/v0/b/minipin.appspot.com/o/media%2Fimg%2Fauth%2Fupload-img-profile.png?alt=media&token=6c40989e-73c4-44e0-911d-8f89a044e384';
 
   constructor(
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private title: Title
+  ) {
+    this.title.setTitle("Registro - Mini-Twitter")
+  }
 
   ngOnInit() {
 

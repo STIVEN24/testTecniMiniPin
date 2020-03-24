@@ -39,7 +39,7 @@ import { HomeComponent } from './components/client/pages/home/home.component';
 
 // post-post //
 import { NewPostComponent } from './components/client/pages/posts/new-post/new-post.component';
-import { PostComponent } from './components/client/pages/posts/post/post.component';
+import { PostComponent, ModalUpdatePostComponent } from './components/client/pages/posts/post/post.component';
 import { MyPostsComponent } from './components/client/pages/posts/my-posts/my-posts.component';
 // close-post //
 
@@ -74,7 +74,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PostComponent,
     NewPostComponent,
     MyPostsComponent,
-    NotFoundPageComponent
+    ModalUpdatePostComponent,
+
+    NotFoundPageComponent,
     // close-post //
   ],
   imports: [
@@ -92,6 +94,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     // close-firebase //
 
+  ],
+  entryComponents: [
+    ModalUpdatePostComponent
   ],
   providers: [
   ],
