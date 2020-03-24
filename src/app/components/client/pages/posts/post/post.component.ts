@@ -195,6 +195,7 @@ export class PostComponent implements OnInit {
   // --- open-open-modal-for-update-post --- //
   openModalForUpdatePost(id_post: string, description_post: string) {
     const dialogRef = this.matDialog.open(ModalUpdatePostComponent, {
+      width: '500px',
       data: { id_post: id_post, description_post: description_post }
     })
     dialogRef.afterClosed().subscribe(result => {

@@ -64,61 +64,63 @@
 
         <div class="content-form-signup">
 
+            <p style="text-align: center">¿Nuevo aquí?, ¡ingresa de una vez!</p>
+
             <form>
 
                 <!-- open-name-field -->
                 <mat-form-field color="primary">
-                    <mat-label>Name</mat-label>
+                    <mat-label>Nombre</mat-label>
                     <input autocomplete="off" type="text" matInput [formControl]="name" [(ngModel)]="authModel.name">
                     <mat-error *ngIf="name.hasError('minlength') && !name.hasError('required')">
-                        Name very short
+                        Nombre cortos no permitimos
                     </mat-error>
                     <mat-error *ngIf="name.hasError('required')">
-                        Name <strong>required</strong>
+                        Tu nombre nos importa. <strong>¡Es requerido!</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- close-name-field -->
 
                 <!-- open-lastname-field -->
                 <mat-form-field color="primary">
-                    <mat-label>Lastname</mat-label>
+                    <mat-label>Apellido</mat-label>
                     <input autocomplete="off" type="text" matInput [formControl]="lastname"
                         [(ngModel)]="authModel.lastname">
                     <mat-error *ngIf="lastname.hasError('minlength') && !lastname.hasError('required')">
-                        Lastname very short
+                        Apellido muy corto
                     </mat-error>
                     <mat-error *ngIf="lastname.hasError('required')">
-                        Lastname <strong>required</strong>
+                        Tu apellido nos importa. <strong>¡Es requerido!</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- close-lastname-field -->
 
                 <!-- open-email-field -->
                 <mat-form-field color="primary">
-                    <mat-label>Email</mat-label>
+                    <mat-label>Correo</mat-label>
                     <input autocomplete="off" type="email" matInput [formControl]="email" [(ngModel)]="authModel.email">
                     <mat-error *ngIf="email.hasError('minlength') && !email.hasError('email')">
-                        Email very short
+                        Tu correo es muy corto
                     </mat-error>
                     <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
-                        Entre email valid, <b>example: user@domain.com</b>
+                        Este correo es invalido, <b>por ejemplo: usuario@domino.com</b>
                     </mat-error>
                     <mat-error *ngIf="email.hasError('required')">
-                        Email is <strong>required</strong>
+                        el correo es muy importante <strong>¡Es requerido!</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- close-email-field -->
 
                 <!-- open-password-field -->
                 <mat-form-field color="primary">
-                    <mat-label>Password</mat-label>
+                    <mat-label>Contraseña</mat-label>
                     <input autocomplete="off" type="password" matInput [formControl]="password"
                         [(ngModel)]="authModel.password">
                     <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
-                        Password very short
+                        Contraseña muy corta,
                     </mat-error>
                     <mat-error *ngIf="password.hasError('required')">
-                        Email is <strong>required</strong>
+                        Tu clave secreta <strong>¡Es requerido!</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- close-password-field -->
@@ -126,19 +128,22 @@
 
                 <!-- open-birth-field -->
                 <!-- <mat-form-field>
-                    <mat-label>Birth</mat-label>
-                    <input name="birth" matInput [matDatepicker]="picker" [(ngModel)]="authModel.birth">
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input name="birth" matInput [matDatepicker]="picker" [(ngModel)]="authModel.birth" [max]="maxDate">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker touchUi #picker></mat-datepicker>
+                    <mat-error *ngIf="birth.hasError('required')">
+                        Necesitammos tu fecha de nacimiento <strong>¡Es requerido!</strong>
+                    </mat-error>
                 </mat-form-field> -->
 
                 <input type="date" placeholder="birth" name="birth" [(ngModel)]="authModel.birth" [formControl]="birth" required>
-                
+
                 <!-- close-birth-field -->
 
 
                 <!-- open-submit-field -->
-                <button type="submit" color="primary" mat-flat-button (click)="signup()">Sign Up</button>
+                <button type="submit" color="primary" mat-flat-button (click)="signup()">Todo listo</button>
                 <!-- close-submit-field -->
 
             </form>

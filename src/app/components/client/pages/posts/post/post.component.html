@@ -104,31 +104,34 @@
 
         <mat-divider></mat-divider>
 
-        <!-- open-likes-post -->
-        <mat-card-actions>
-            <span>
-                <button (click)="!isAuth ? gotToLogin() : updateLikes(post.payload.doc.id) " mat-icon-button
-                    matTooltip="Me gusta">
-                    <mat-icon>
-                        thumb_up
-                    </mat-icon>
-                </button>
-                <b>{{ post.payload.doc.data().likes }}</b>
-            </span>
-            <span>
-                <button mat-icon-button matTooltip="Comentarios">
-                    <mat-icon>
-                        comment
-                    </mat-icon>
-                </button>
-                <b>{{ post.payload.doc.data().likes }}</b>
-            </span>
-        </mat-card-actions>
-        <!-- close-likes-post -->
+        <mat-card-footer>
 
-        <!-- <mat-card-footer>
-            {{ post.payload.doc.data().created_at.toDate() | date : 'medium' }}
-        </mat-card-footer> -->
+            <!-- open-likes-post -->
+            <mat-card-actions>
+                <span>
+                    <button (click)="!isAuth ? gotToLogin() : updateLikes(post.payload.doc.id) " mat-icon-button
+                        matTooltip="Me gusta">
+                        <mat-icon>
+                            thumb_up
+                        </mat-icon>
+                    </button>
+                    <b>{{ post.payload.doc.data().likes }}</b>
+                </span>
+                <span>
+                    <button mat-icon-button matTooltip="Comentarios">
+                        <mat-icon>
+                            comment
+                        </mat-icon>
+                    </button>
+                    <b>{{ post.payload.doc.data().likes }}</b>
+                </span>
+            </mat-card-actions>
+            <!-- close-likes-post -->
+
+            <div class="card-created_at_post">
+                {{ post.payload.doc.data().created_at.toDate() | date : 'EEEE, MMMM d, y, h:mm:ss a' }}
+            </div>
+        </mat-card-footer>
 
     </mat-card>
 

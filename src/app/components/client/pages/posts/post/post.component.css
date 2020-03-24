@@ -21,6 +21,10 @@ mat-card mat-card-content {
 }
 
 mat-card mat-card-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     padding: 1em;
 }
 
@@ -53,11 +57,16 @@ mat-card mat-card-footer {
 mat-card-actions {
     display: flex;
     align-items: center;
-    margin: 1em !important;
+    margin: 0 !important;
 }
 
 mat-card-actions span {
-    margin: 0 1em
+    margin: 0 2em;
+}
+
+.card-created_at_post {
+    text-transform: capitalize;
+    margin-right: 2em;
 }
 
 .mat-card-header-actions button {

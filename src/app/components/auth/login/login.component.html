@@ -12,13 +12,13 @@
 
                 <!-- open-email-field -->
                 <mat-form-field color="primary">
-                    <mat-label>Email</mat-label>
+                    <mat-label>Ingresa tu correo</mat-label>
                     <input autocomplete="off" type="email" matInput [formControl]="email" [(ngModel)]="authModel.email">
                     <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
-                        Entre email valid, <b>example: user@domain.com</b>
+                        Este correo es invalido, <b>por ejemplo: usuario@domino.com</b>
                     </mat-error>
                     <mat-error *ngIf="email.hasError('required')">
-                        Email is <strong>required</strong>
+                        Para poder ingresar debes ingresar tu correo. <strong>¡Es requerido!</strong>
                     </mat-error>
                 </mat-form-field>
 
@@ -26,26 +26,26 @@
 
                 <!-- open-password-field -->
                 <mat-form-field color="primary">
-                    <mat-label>Password</mat-label>
+                    <mat-label>Ingresa tu clave secreta</mat-label>
                     <input autocomplete="off" type="password" matInput [formControl]="password"
                         [(ngModel)]="authModel.password">
                     <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
-                        Password very short
+                        ¡Contraseña muy corta!.
                     </mat-error>
                     <mat-error *ngIf="password.hasError('required')">
-                        Email is <strong>required</strong>
+                        La clave maestra es necesaria. <strong>¡Es requerido!</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- close-password-field -->
 
                 <!-- open-submit-field -->
-                <button type="submit" color="primary" mat-flat-button (click)="login()">Log In</button>
+                <button type="submit" color="primary" mat-flat-button (click)="login()">Iniciar sesión</button>
                 <!-- close-submit-field -->
 
             </form>
 
             <p class="a-link-signup">
-                <a routerLink="/auth/signup">No tengo cuenta</a>
+                <a routerLink="/auth/signup">¿No tienes cuenta?, ¡Ingresa aquí!</a>
             </p>
 
         </div>

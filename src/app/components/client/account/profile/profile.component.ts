@@ -21,6 +21,8 @@ import { File } from 'src/app/shared/models/file.model';
 })
 export class ProfileComponent implements OnInit {
 
+  disabledUpdateInputProfile: boolean;
+
   authModel: Auth = {
     name: '',
     lastname: '',
@@ -40,23 +42,23 @@ export class ProfileComponent implements OnInit {
     private title: Title
   ) {
     this.title.setTitle("Registro - Mini-Twitter")
+
+    
   }
-
+  
   ngOnInit() {
-
     this.authService.userData.subscribe(user => {
       this.initFormForUpdate(user);
       this.authModel.uid = user.uid
     });
-
   }
 
   // open-eclaring-fields //
-  name = new FormControl('', [Validators.required, Validators.minLength(3)]);
-  lastname = new FormControl('', [Validators.required]);
-  email = new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email]);
-  // password = new FormControl('', [Validators.required, Validators.minLength(6)]);
-  birth = new FormControl({ value: '', disabled: true }, [Validators.required]);
+  name = new FormControl({ value: '', disabled: this.disabledUpdateInputProfile }, [Validators.required, Validators.minLength(3)]);
+  lastname = new FormControl({ value: '', disabled: this.disabledUpdateInputProfile }, [Validators.required]);
+  email = new FormControl({ value: '', disabled: this.disabledUpdateInputProfile }, [Validators.required, Validators.email]);
+  description = new FormControl({ value: '', disabled: this.disabledUpdateInputProfile });
+  birth = new FormControl({ value: '', disabled: true });
   // close-declaring-fields //
 
   // open-update-profile //
@@ -89,6 +91,12 @@ export class ProfileComponent implements OnInit {
   // --- open-upload-img --- //
   handleImage(img: File): void {
     this.image = img;
+  }
+  // --- close-upload-img --- //
+
+  // --- close-upload-img --- //
+  allowUpdateProfile() {
+    this.disabledUpdateInputProfile = false 
   }
   // --- close-upload-img --- //
 

@@ -67,8 +67,8 @@
 
             <!-- open-name-field -->
             <mat-form-field color="primary">
-                <mat-label>Name</mat-label>
-                <input autocomplete="off" type="text" matInput [formControl]="name" [(ngModel)]="authModel.name">
+                <mat-label>Nombre</mat-label>
+                <input autocomplete="off"  type="text" matInput [formControl]="name" [(ngModel)]="authModel.name">
                 <mat-error *ngIf="name.hasError('minlength') && !name.hasError('required')">
                     Name very short
                 </mat-error>
@@ -80,7 +80,7 @@
 
             <!-- open-lastname-field -->
             <mat-form-field color="primary">
-                <mat-label>Lastname</mat-label>
+                <mat-label>Apellido</mat-label>
                 <input autocomplete="off" type="text" matInput [formControl]="lastname"
                     [(ngModel)]="authModel.lastname">
                 <mat-error *ngIf="lastname.hasError('minlength') && !lastname.hasError('required')">
@@ -94,10 +94,10 @@
 
             <!-- open-email-field -->
             <mat-form-field color="primary">
-                <mat-label>Email</mat-label>
+                <mat-label>Correo</mat-label>
                 <input autocomplete="off" type="email" matInput [formControl]="email" [(ngModel)]="authModel.email">
                 <mat-error *ngIf="email.hasError('minlength') && !email.hasError('email')">
-                    Email vrey short
+                    Email very short
                 </mat-error>
                 <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
                     Entre email valid, <b>example: user@domain.com</b>
@@ -110,8 +110,8 @@
 
             <!-- open-description-field -->
             <mat-form-field>
-                <mat-label>Description</mat-label>
-                <textarea type="text" matInput placeholder="Your description..." [(ngModel)]="authModel.description"
+                <mat-label>Tu descripción</mat-label>
+                <textarea type="text" matInput placeholder="Your description..." [formControl]="description" [(ngModel)]="authModel.description"
                     name="description"></textarea>
             </mat-form-field>
             <!-- close-description-field -->
@@ -119,32 +119,23 @@
 
             <!-- open-birth-field -->
             <!-- <mat-form-field>
-                <mat-label>Birth</mat-label>
-                <input name="birth" matInput [matDatepicker]="picker" [(ngModel)]="authModel.birth">
+                <mat-label>Fecha de Nacimiento</mat-label>
+                <input name="birth" matInput [matDatepicker]="picker" [formControl]="birth" [(ngModel)]="authModel.birth">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker touchUi #picker></mat-datepicker>
             </mat-form-field> -->
-
-            <mat-form-field color="primary">
-                <input matInput type="date" placeholder="birth" name="birth" [(ngModel)]="authModel.birth"
-                    [formControl]="birth" required>
-            </mat-form-field>
-
+            <input type="date" placeholder="birth" name="birth" [(ngModel)]="authModel.birth" [formControl]="birth" required>
             <!-- close-birth-field -->
-
-
 
             <!-- open-submit-field -->
             <button type="submit" color="primary" mat-flat-button (click)="update()">Update</button>
             <!-- close-submit-field -->
-
+            
         </div>
-
-
-
-
+        
+        
     </form>
-
+    
 </mat-card>
 
 <app-my-posts></app-my-posts>

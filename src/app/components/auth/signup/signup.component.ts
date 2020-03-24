@@ -20,6 +20,9 @@ import { Auth } from 'src/app/shared/models/auth.model';
 })
 export class SignupComponent implements OnInit {
 
+  minDate: Date;
+  maxDate: Date;
+
   authModel: Auth = {
     name: '',
     lastname: '',
@@ -37,6 +40,10 @@ export class SignupComponent implements OnInit {
     private title: Title
   ) {
     this.title.setTitle("Registro - Mini-Twitter")
+
+    const currentYear = new Date();
+    this.maxDate = new Date(currentYear);
+    
   }
 
   ngOnInit() { }

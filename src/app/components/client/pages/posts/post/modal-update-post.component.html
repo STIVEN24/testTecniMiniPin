@@ -1,13 +1,12 @@
-<h1 mat-dialog-title> Editando post </h1>
+<h2> Editando post </h2>
 <div mat-dialog-content>
-    <p>¡Estás a punto de actualizar un post!.</p>
     <mat-form-field>
         <mat-label>Nueva descripción</mat-label>
-        <input matInput [(ngModel)]="postModel.description">
+        <textarea matInput name="description" [(ngModel)]="postModel.description" id="" cols="30" rows="1"></textarea>
     </mat-form-field>
 </div>
 <div mat-dialog-actions>
     <!-- <button mat-button (click)="onNoClick()">No Thanks</button> -->
-    <button mat-button (click)="updatePostOne()">Actualizar post</button>
+    <button mat-stroked-button (click)="updatePostOne()" color="primary">Actualizar post</button>
     <button mat-button cdkFocusInitial (click)="onNoClick()">Cerrar</button>
 </div>
