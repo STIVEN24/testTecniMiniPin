@@ -1,36 +1,48 @@
-mat-card {
-    box-shadow:
-        0 2px 3px -1px rgba(0, 0, 0, 2),
-        0 1px 3px 0 rgba(0, 0, 0, .14),
-        0 5px 10px 0 rgba(0, 0, 0, .5) !important;
+.content {
     margin-top: 10em;
     position: relative;
 }
 
-mat-card form {
+.content form {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
 
-mat-card form .form-fields-profile {
+.content form .form-fields-profile {
     padding-top: 10em;
     width: 500px;
 }
 
 .img-profile-pic-svg {
+    overflow: hidden;
     width: 300px;
     height: 300px;
     position: absolute;
     transform: translate(-50%, -50%);
     border: 1px solid var(--bg-color-primary);
     border-radius: 50%;
-    background: #fff;
-    box-shadow:
-        0 2px 3px -1px rgba(0, 0, 0, 2),
-        0 1px 3px 0 rgba(0, 0, 0, .14),
-        0 5px 10px 0 rgba(0, 0, 0, .5) !important;
+    background: var(--bg-color-white);
+    box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 2), 0 1px 3px 0 rgba(0, 0, 0, .14), 0 5px 10px 0 rgba(0, 0, 0, .5) !important;
+}
+
+.img-profile-pic-svg p {
+    transition: all .3s ease;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: var(--bg-color-primary);
+    color: var(--bg-color-white);
+    padding: 1em 0;
+    opacity: .5;
+}
+
+.img-profile-pic-svg:hover p {
+    opacity: 1;
 }
 
 .img-profile-pic-svg svg {
@@ -38,6 +50,30 @@ mat-card form .form-fields-profile {
     height: 300px;
 }
 
-mat-card .form-fields-profile mat-form-field {
+.content .form-fields-profile mat-form-field {
     width: 100%
 }
+
+/* --- open-spinner-profile --- */
+
+.spinner-loading-photoURL-profile {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: var(--bg-color-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: 1s all;
+}
+
+.spinner-loading-photoURL-profile.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- close-spinner-profile --- */

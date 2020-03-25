@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { MatSnackBar, MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material';
 
 // --- open-others --- //
 import { FormControl, Validators } from '@angular/forms';
@@ -21,83 +22,170 @@ import { File } from 'src/app/shared/models/file.model';
 })
 export class ProfileComponent implements OnInit {
 
-  disabledUpdateInputProfile: boolean;
+  public spinnerLoadingPhotoURLProfile: boolean;
+
+  uid: string;
 
   authModel: Auth = {
     name: '',
     lastname: '',
     email: '',
-    // password: '',
     description: '',
     birth: '',
     photoURL: ''
   }
 
-  public booleanImgProfileValidate: boolean;
   public image: File;
   public currentImage = 'https://firebasestorage.googleapis.com/v0/b/minipin.appspot.com/o/media%2Fimg%2Fauth%2Fupload-img-profile.png?alt=media&token=6c40989e-73c4-44e0-911d-8f89a044e384';
 
+
+
   constructor(
     private authService: AuthService,
-    private title: Title
+    private title: Title,
+    private matSnackBar: MatSnackBar
   ) {
     this.title.setTitle("Registro - Mini-Twitter")
 
-    
+    this.spinnerLoadingPhotoURLProfile = true
   }
-  
+
   ngOnInit() {
     this.authService.userData.subscribe(user => {
-      this.initFormForUpdate(user);
-      this.authModel.uid = user.uid
+      this.uid = user.uid
+
+      this.authService.getUser(this.uid).subscribe(
+        (res: any) => {
+          this.authModel.name = res.name;
+          this.authModel.lastname = res.lastname;
+          this.authModel.email = res.email;
+          this.authModel.description = res.description;
+          this.authModel.photoURL = res.photoURL;
+          this.authModel.birth = res.birth
+          setTimeout(() => { this.spinnerLoadingPhotoURLProfile = false; }, 2000);
+        },
+        err => console.log(err)
+      )
+
     });
+
   }
 
   // open-eclaring-fields //
-  name = new FormControl({ value: '', disabled: this.disabledUpdateInputProfile }, [Validators.required, Validators.minLength(3)]);
-  lastname = new FormControl({ value: '', disabled: this.disabledUpdateInputProfile }, [Validators.required]);
-  email = new FormControl({ value: '', disabled: this.disabledUpdateInputProfile }, [Validators.required, Validators.email]);
-  description = new FormControl({ value: '', disabled: this.disabledUpdateInputProfile });
-  birth = new FormControl({ value: '', disabled: true });
+  name = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  lastname = new FormControl('', [Validators.required]);
+  email = new FormControl('', [Validators.required, Validators.email]);
+  description = new FormControl('');
+  birth = new FormControl('');
   // close-declaring-fields //
 
   // open-update-profile //
-  update() {
-    this.authService.preUpdateProfile(this.authModel, this.image);
-  }
+  // update() {
+  //   this.authService.preUpdateProfile(this.authModel, this.image);
+  // }
   // close-update-profile //
 
   // --- open-init-load-form-profile ---
-  private initFormForUpdate(user) {
-    if (user.photoURL) {
-      this.booleanImgProfileValidate = true;
-      this.currentImage = user.photoURL
-    } else {
-      this.booleanImgProfileValidate = false;
-    }
-    this.authModel.email = user.email;
-    this.authService.getUser(user.uid).then(
-      (res: any) => {
-        this.authModel.name = res.name;
-        this.authModel.lastname = res.lastname;
-        this.authModel.birth = res.birth;
-        this.authModel.photoURL = res.photoURL;
-        this.authModel.description = res.description;
-      })
-      .catch(err => console.log(err));
-  }
+  // private initFormForUpdate(user) {
+  //   if (user.photoURL) {
+  //     this.booleanImgProfileValidate = true;
+  //     this.currentImage = user.photoURL
+
+  //   } else {
+  //     this.booleanImgProfileValidate = false;
+  //   }
+  //   console.log(user.photoURL)
+
+  //   this.authModel.email = user.email;
+  //   this.authService.getUser(user.uid).then(
+  //     (res: any) => {
+  //       this.authModel.name = res.name;
+  //       this.authModel.lastname = res.lastname;
+  //       this.authModel.birth = res.birth;
+  //       this.authModel.photoURL = res.photoURL;
+  //       this.authModel.description = res.description;
+  //     })
+  //     .catch(err => console.log(err));
+  // }
   // --- close-init-load-form-profile ---
 
+
+
   // --- open-upload-img --- //
-  handleImage(img: File): void {
-    this.image = img;
+  handleImage(photoURL: File): void {
+    this.spinnerLoadingPhotoURLProfile = true
+    if (photoURL) {
+      if (this.validateSizeImg(photoURL.size) && this.validateTypeImg(photoURL)) {
+        this.authService.uodatePhotoURLProfile(this.uid, photoURL)
+          .subscribe(
+            res => setTimeout(() => { this.spinnerLoadingPhotoURLProfile = false; this.showSnackBar('Foto Actualizada') }, 2000),
+            err => console.log(err)
+          )
+        this.image = photoURL;
+      } else {
+        this.showSnackBar('Imágen incorrecta')
+      }
+    }
   }
   // --- close-upload-img --- //
 
-  // --- close-upload-img --- //
-  allowUpdateProfile() {
-    this.disabledUpdateInputProfile = false 
+  // --- open-function-validate-img ---//
+  // validate-size-img //
+  private validateSizeImg(size: any) {
+    const sizeAllow2MB = 2097152; // equivale a 2 MB
+
+    if (size < sizeAllow2MB) {
+      size = true
+    } else {
+      size = false
+    }
+    return !size ? false : true
   }
-  // --- close-upload-img --- //
+  // validate-type-img //
+  private validateTypeImg(img: any) {
+    const typeAllow = "(.*?)\.(jpg|png|jpeg)$";
+    let valToLower = img.name.toLowerCase();
+    let regex = new RegExp(typeAllow);
+    let regexTest = regex.test(valToLower);
+    return !regexTest ? false : true;
+  }
+  // --- close-function-validate-img ---//
+
+
+
+
+
+
+  // --- open-UI --- //
+
+  // open-snack-bar //
+  showSnackBar(message: string) {
+    this.matSnackBar.openFromComponent(SnackBarComponent, {
+      duration: 3000,
+      data: message
+    })
+
+  }
+  // close-snack-bar //
+
+  // --- close-UI --- //
+
+
+}
+
+@Component({
+  template: `
+  <span> {{ data }} </span>
+  `,
+  styles: [
+    `span { color: #fff }`
+  ]
+})
+export class SnackBarComponent {
+
+  constructor(
+    private matSnackBarRef: MatSnackBarRef<SnackBarComponent>,
+    @Inject(MAT_SNACK_BAR_DATA) public data: any
+  ) { }
 
 }

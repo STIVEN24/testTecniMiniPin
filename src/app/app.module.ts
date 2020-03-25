@@ -1,5 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // --- open-modules --- //
 import { AppRoutingModule } from './modules/app-routing.module';
@@ -33,7 +34,7 @@ import { FooterComponent } from './components/public/footer/footer.component';
 // close-public //
 
 // open-client //
-import { ProfileComponent } from './components/client/account/profile/profile.component';
+import { ProfileComponent, SnackBarComponent } from './components/client/account/profile/profile.component';
 import { HomeComponent } from './components/client/pages/home/home.component';
 // close-client //
 
@@ -48,7 +49,6 @@ import { MyPostsComponent } from './components/client/pages/posts/my-posts/my-po
 // --- open-others --- //
 import { environment } from 'src/environments/environment';
 import { NotFoundPageComponent } from './components/client/pages/not-found-page/not-found-page.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // --- close-others --- //
 
 @NgModule({
@@ -75,6 +75,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NewPostComponent,
     MyPostsComponent,
     ModalUpdatePostComponent,
+    SnackBarComponent,
 
     NotFoundPageComponent,
     // close-post //
@@ -96,7 +97,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   ],
   entryComponents: [
-    ModalUpdatePostComponent
+    ModalUpdatePostComponent,
+    SnackBarComponent
   ],
   providers: [
   ],

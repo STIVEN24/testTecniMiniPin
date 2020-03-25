@@ -1,11 +1,11 @@
-<mat-card>
+<div class="content">
 
     <form>
 
         <div class="form-img-photo-profile">
 
             <!-- open-validate-if-exist-img-profile --- -->
-            <div *ngIf="!booleanImgProfileValidate" class="img-profile-pic-svg" (click)="inputImageProfile.click()">
+            <div class="img-profile-pic-svg" *ngIf="authModel.photoURL.length == 0" (click)="inputImageProfile.click()">
                 <svg id="457bf273-24a3-4fd8-a857-e9b918267d6a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" width="698" height="698" viewBox="0 0 698 698">
                     <defs>
@@ -48,15 +48,22 @@
             <!-- close-validate-if-exist-img-profile --- -->
 
             <!-- open-photo-field -->
-            <div *ngIf="booleanImgProfileValidate" class="img-profile-pic-svg">
-                <img *ngIf="booleanImgProfileValidate" (click)="inputImageProfile.click()" alt="" [ngStyle]=" { 
-                    'background-image': 'url('+currentImage+')',
+            <div class="img-profile-pic-svg" *ngIf="authModel.photoURL">
+
+                <div class="spinner-loading-photoURL-profile" [ngClass]="spinnerLoadingPhotoURLProfile ? 'active' : ''">
+                    <mat-spinner></mat-spinner>
+                </div>
+
+                <img (click)="inputImageProfile.click()" alt="" [ngStyle]=" { 
+                    'background-image': 'url('+authModel.photoURL+')',
                     'width': '300px', 'height': '300px',
                     'background-size': 'cover', 'background-position' : 'center',
-                    'border-radius' : '50%' } ">
+                    'border-radius' : '50%' } " >
+
+                <p (click)="inputImageProfile.click()">Cambiar</p>
 
             </div>
-            <input hidden type="file" #inputImageProfile name="photoURL"
+            <input accept=".png, .jpg, jpeg" hidden type="file" #inputImageProfile name="photoURL"
                 (change)="handleImage( ($event?.target?.files)[0] )">
             <!-- close-photo-field -->
 
@@ -68,7 +75,8 @@
             <!-- open-name-field -->
             <mat-form-field color="primary">
                 <mat-label>Nombre</mat-label>
-                <input autocomplete="off"  type="text" matInput [formControl]="name" [(ngModel)]="authModel.name">
+                <input autocomplete="off" name="name" type="text" matInput [formControl]="name"
+                    [(ngModel)]="authModel.name">
                 <mat-error *ngIf="name.hasError('minlength') && !name.hasError('required')">
                     Name very short
                 </mat-error>
@@ -111,8 +119,8 @@
             <!-- open-description-field -->
             <mat-form-field>
                 <mat-label>Tu descripción</mat-label>
-                <textarea type="text" matInput placeholder="Your description..." [formControl]="description" [(ngModel)]="authModel.description"
-                    name="description"></textarea>
+                <textarea type="text" matInput placeholder="Your description..." [formControl]="description"
+                    [(ngModel)]="authModel.description" name="description"></textarea>
             </mat-form-field>
             <!-- close-description-field -->
 
@@ -124,18 +132,20 @@
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker touchUi #picker></mat-datepicker>
             </mat-form-field> -->
-            <input type="date" placeholder="birth" name="birth" [(ngModel)]="authModel.birth" [formControl]="birth" required>
+            <input type="date" placeholder="birth" name="birth" [(ngModel)]="authModel.birth" [formControl]="birth"
+                required>
             <!-- close-birth-field -->
 
             <!-- open-submit-field -->
-            <button type="submit" color="primary" mat-flat-button (click)="update()">Update</button>
+            <button type="submit" color="primary" mat-flat-button (click)="update()">Actualizar perfil</button>
             <!-- close-submit-field -->
-            
+
         </div>
-        
-        
+
+
     </form>
-    
-</mat-card>
+
+
+</div>
 
 <app-my-posts></app-my-posts>

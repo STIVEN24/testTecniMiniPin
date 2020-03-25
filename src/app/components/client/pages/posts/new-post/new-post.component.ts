@@ -74,16 +74,18 @@ export class NewPostComponent implements OnInit {
     )
   }
 
+  // --- open-get-user --- //
   getUser(userId: string) {
-
     this.authService.getUser(userId)
-      .then((res: any) => {
-        this.photoURL = res.photoURL;
-        this.name= res.name;
-      })
-      .catch(err => console.log(err))
-
+      .subscribe(
+        (res: any) => {
+          this.photoURL = res.photoURL;
+          this.name = res.name;
+        },
+        err => console.log(err)
+      )
   }
+  // --- close-get-user --- //
 
   description = new FormControl('', [Validators.required]);
   getErrorsDescription() { return this.description.hasError('required') ? 'Description Required' : '' }

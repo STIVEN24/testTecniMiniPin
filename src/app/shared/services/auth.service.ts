@@ -31,17 +31,21 @@ export class AuthService {
   }
 
   getUser(uid: string) {
-    return this.angularFirestore.doc(`users/${uid}`).ref
-      .get()
-      .then(doc => {
-        if (!doc.exists) {
-          console.log("document no encontrado");
-          return false;
-        } else {
-          return doc.data();
-        }
-      })
-      .catch(err => console.log(err))
+
+    return this.angularFirestore.collection<Auth>('users').doc(uid).valueChanges()
+
+    // return this.angularFirestore.doc(`users/${uid}`).ref
+    //   .get()
+    //   .then(doc => {
+    //     if (!doc.exists) {
+    //       console.log("document no encontrado");
+    //       return false;
+    //     } else {
+    //       return doc.data();
+    //     }
+    //   })
+    //   .catch(err => console.log(err))
+
   }
 
   // --- open-signup --- //
@@ -53,6 +57,7 @@ export class AuthService {
           const uid = res.user.uid;
           this.angularFirestore.collection('users').doc(res.user.uid).set({
             uid: uid,
+            email: data.email,
             name: this.capitalize(data.name),
             lastname: this.capitalize(data.lastname),
             birth: data.birth,
@@ -94,59 +99,88 @@ export class AuthService {
   // --- close-logout --- //
 
   // --- open-update-profile --- //
-  updateProfile(user: Auth) {
-    return new Promise((resolve, reject) => {
-      this.angularFirestore.doc(`users/${user.uid}`).ref
-        .get()
-        .then(doc => {
-          if (!doc.exists) {
-            console.log("document no encontrado");
-            return false;
-          } else {
-            console.log("User updated");
-            this.angularFirestore.collection('users').doc(user.uid).update(user);
-            this.angularFireAuth.auth.currentUser.updateProfile(
-              {
-                photoURL: user.photoURL
-              }
-            )
-          }
-          resolve(doc)
-        })
-        .catch(err => reject(err))
-    })
-  }
+  // updateProfile(user: Auth) {
+  //   return new Promise((resolve, reject) => {
+  //     this.angularFirestore.doc(`users/${user.uid}`).ref
+  //       .get()
+  //       .then(doc => {
+  //         if (!doc.exists) {
+  //           console.log("document no encontrado");
+  //           return false;
+  //         } else {
+  //           console.log("User updated");
+  //           this.angularFirestore.collection('users').doc(user.uid).update(user);
+  //           this.angularFireAuth.auth.currentUser.updateProfile(
+  //             {
+  //               photoURL: user.photoURL
+  //             }
+  //           )
+  //         }
+  //         resolve(doc)
+  //       })
+  //       .catch(err => reject(err))
+  //   })
+  // }
   // --- close-update-profile --- //
 
   // --- open-pre-update-profile --- //
-  preUpdateProfile(user: Auth, img?: File) {
-    if (img) {
-      console.log("Con img");
-      this.uploadImgProfile(user, img)
-    } else {
-      console.log("sin img");
-      this.updateProfile(user)
-    }
-  }
+  // preUpdateProfile(user: Auth, img?: File) {
+  //   if (img) {
+  //     console.log("Con img");
+  //     this.uploadImgProfile(user, img)
+  //   } else {
+  //     console.log("sin img");
+  //     this.updateProfile(user)
+  //   }
+  // }
   // --- close-pre-update-profile --- //
 
-  // --- open-upload-image-profile --- //
-  private uploadImgProfile(user: Auth, img: File) {
-    this.filePath = `media/img/avatars/${img.name}`;
+
+
+
+  // --- open-update-photoURL-profile --- //
+  uodatePhotoURLProfile(uid: string, photoURL: File) {
+    this.filePath = `media/img/avatars/${photoURL.name}`;
     const fileRef = this.angularFirStorage.ref(this.filePath);
-    const task = this.angularFirStorage.upload(this.filePath, img);
-    task.snapshotChanges()
+    const task = this.angularFirStorage.upload(this.filePath, photoURL);
+    return task.snapshotChanges()
       .pipe(
         finalize(
           () => {
-            fileRef.getDownloadURL().subscribe(urlImg => {
-              user.photoURL = urlImg;
-              this.updateProfile(user)
+            fileRef.getDownloadURL().subscribe(urlPhoto => {
+              this.angularFirestore.collection('users').doc(uid).update({ photoURL: urlPhoto })
+              this.angularFireAuth.auth.currentUser.updateProfile(
+                {
+                  photoURL: urlPhoto
+                }
+              ).then(res => {
+                return res
+              })
+              .catch(err => console.log(err))
             })
           }
         )
-      ).subscribe();
+      )
   }
+  // --- close-update-photoURL-profile --- //
+
+  // --- open-upload-image-profile --- //
+  // private uploadImgProfile(user: Auth, img: File) {
+  //   this.filePath = `media/img/avatars/${img.name}`;
+  //   const fileRef = this.angularFirStorage.ref(this.filePath);
+  //   const task = this.angularFirStorage.upload(this.filePath, img);
+  //   task.snapshotChanges()
+  //     .pipe(
+  //       finalize(
+  //         () => {
+  //           fileRef.getDownloadURL().subscribe(urlImg => {
+  //             user.photoURL = urlImg;
+  //             this.updateProfile(user)
+  //           })
+  //         }
+  //       )
+  //     ).subscribe();
+  // }
   // --- close-upload-image-profile --- //
 
 

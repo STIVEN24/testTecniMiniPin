@@ -109,7 +109,7 @@
             <!-- open-likes-post -->
             <mat-card-actions>
                 <span>
-                    <button (click)="!isAuth ? gotToLogin() : updateLikes(post.payload.doc.id) " mat-icon-button
+                    <button (click)="!isAuth ? gotToLogin() : updateLikes(post.payload.doc.id, post.payload.doc.data().likes) " mat-icon-button
                         matTooltip="Me gusta">
                         <mat-icon>
                             thumb_up
@@ -123,7 +123,7 @@
                             comment
                         </mat-icon>
                     </button>
-                    <b>{{ post.payload.doc.data().likes }}</b>
+                    <b>{{ post.payload.doc.data().comments.length }}</b>
                 </span>
             </mat-card-actions>
             <!-- close-likes-post -->

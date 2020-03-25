@@ -205,8 +205,10 @@ export class PostComponent implements OnInit {
   // --- open-open-modal-for-update-post --- //
 
   // --- open-update-likes --- //
-  updateLikes(id_post: string) {    
-    this.postService.updateLikes(id_post);
+  updateLikes(id_post: string, likes_post: number) {    
+    this.postService.updateLikes(id_post, likes_post)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
   }
   // --- close-update-likes--- //
 

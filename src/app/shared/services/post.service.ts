@@ -117,9 +117,17 @@ export class PostService {
   // --- close-update-description --- //
 
   // --- open-increment-likes --- //
-  updateLikes(id_post: string) {
-
-    console.log(id_post);
+  updateLikes(id_post: string, likes_post: number) {
+    
+    return new Promise((resolve, reject) => {
+      this.angularFirestore.collection('posts')
+        .doc(id_post)
+        .update({ likes: likes_post + 1} )
+        .then(res => {
+          resolve(res)
+        })
+        .catch(err => reject(err))
+    })
 
   }
   // --- close-increment-likes --- //
