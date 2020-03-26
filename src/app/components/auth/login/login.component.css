@@ -28,7 +28,7 @@
 }
 
 .wrapper-form-login .form-login .content-form-login form button {
-    margin: auto;
+    margin: .5em auto;
 }
 
 .wrapper-form-login .form-login .content-form-login::before {

@@ -75,14 +75,14 @@
 
                 <button mat-icon-button class="mat-card-" color="primary"
                     (click)="openModalForUpdatePost(post.payload.doc.id, post.payload.doc.data().description)"
-                    matTooltip="Editar este post">
+                    >
                     <mat-icon>
                         edit
                     </mat-icon>
                 </button>
 
                 <button mat-icon-button class="mat-card-" color="warn" (click)="deletePost(post.payload.doc.id)"
-                    matTooltip="Eliminar este post">
+                    >
                     <mat-icon>
                         delete
                     </mat-icon>
@@ -110,7 +110,7 @@
             <mat-card-actions>
                 <span>
                     <button (click)="!isAuth ? gotToLogin() : updateLikes(post.payload.doc.id, post.payload.doc.data().likes) " mat-icon-button
-                        matTooltip="Me gusta">
+                        >
                         <mat-icon>
                             thumb_up
                         </mat-icon>
@@ -118,7 +118,7 @@
                     <b>{{ post.payload.doc.data().likes }}</b>
                 </span>
                 <span>
-                    <button mat-icon-button matTooltip="Comentarios">
+                    <button mat-icon-button >
                         <mat-icon>
                             comment
                         </mat-icon>

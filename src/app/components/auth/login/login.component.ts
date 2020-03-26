@@ -20,6 +20,8 @@ import { Auth } from 'src/app/shared/models/auth.model';
 })
 export class LoginComponent implements OnInit {
 
+  showPassword: boolean = false;
+
   authModel: Auth = {
     email: '',
     password: ''

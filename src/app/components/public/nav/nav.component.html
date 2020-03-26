@@ -1,12 +1,7 @@
-<!-- <ul>
-    <li>
-        <button *ngIf="isAuth" (click)="logout()">Log Out</button>
-    </li>
-</ul> -->
 <mat-toolbar>
 
     <mat-toolbar-row>
-        <h1 routerLink="/" style="cursor: pointer;" matTooltip="Inicio">
+        <h1 routerLink="/" style="cursor: pointer;">
             App-Test-Tecnic
         </h1>
         <span class="example-spacer"></span>
@@ -16,7 +11,15 @@
         <button *ngIf="!isAuth" mat-button routerLink="/auth/signup" color="primary">
             Registrarme
         </button>
-        <button *ngIf="isAuth" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+
+        <button mat-flat-button *ngIf="isAuth" mat-button routerLink="/account/profile"  color="primary">
+            Perfil
+        </button>
+        <button *ngIf="isAuth" mat-button (click)="logout()" color="primary">
+            Cerrar sesión
+        </button>
+
+        <!-- <button *ngIf="isAuth" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon aria-label="Example thumbs up SVG icon" aria-hidden="false">
                 account_circle
             </mat-icon>
@@ -30,7 +33,7 @@
                 Cerrar sesión
             </button>
 
-        </mat-menu>
+        </mat-menu> -->
 
     </mat-toolbar-row>
 

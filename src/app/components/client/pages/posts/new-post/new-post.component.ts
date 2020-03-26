@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 
 // --- open-firebase --- //
 // --- close-firebase --- //
@@ -36,25 +36,15 @@ export class NewPostComponent implements OnInit {
       photoURL: ''
     },
     likes: 0,
-    comments: [
-      { uid_user: '', message: '' }
-    ],
+    comments: [],
     created_at: new Date()
   }
 
   constructor(
     private postService: PostService,
     private authService: AuthService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
-    this.activatedRoute.params.subscribe(
-      (param) => {
-        if (param['id_post']) {
-          console.log(param)
-        }
-      }
-    )
   }
 
   ngOnInit() {
@@ -97,14 +87,9 @@ export class NewPostComponent implements OnInit {
 
     this.postService.createPost(this.postModel)
       .then(res => {
-        this.postModel.description = "";
+        this.postModel.description = '';
       })
       .catch(err => console.log(err))
-
-    setTimeout(() => {
-
-    }, 2000);
-
   }
   // close-create-post //
 

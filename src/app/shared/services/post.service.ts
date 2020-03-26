@@ -53,9 +53,7 @@ export class PostService {
         created_at: post.created_at,
         description: post.description,
         likes: 0,
-        comments: [
-          { uid_user: '', message: '' }
-        ]
+        comments: []
       }
     ).then(res => { return res })
       .catch(err => console.log(err))

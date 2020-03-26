@@ -16,7 +16,7 @@
     width: 90%;
     max-width: 1000px;
     min-width: 500px;
-    margin: 5em auto;
+    margin: 3em auto;
 }
 /* --- close-contianer --- */
 
@@ -33,3 +33,10 @@ app-nav {
     box-shadow: 0 0 10px 1px black;
 }
 /* --- close-nav --- */
+
+.content {
+    background: inherit;
+    background-attachment: fixed;
+    height: 100%;
+    overflow-y: auto;
+}

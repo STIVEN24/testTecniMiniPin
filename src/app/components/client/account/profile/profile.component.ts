@@ -8,6 +8,7 @@ import { FormControl, Validators } from '@angular/forms';
 
 // --- open-services --- //
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { ChangeThemeService } from 'src/app/shared/services/change-theme.service';
 // --- close-services --- //
 
 // --- open-models --- //
@@ -23,6 +24,9 @@ import { File } from 'src/app/shared/models/file.model';
 export class ProfileComponent implements OnInit {
 
   public spinnerLoadingPhotoURLProfile: boolean;
+  public changeThemeSlideToggleBoolean: boolean;
+  public changeTextThemeSlideToggle: string = 'Dark';
+
 
   uid: string;
 
@@ -43,7 +47,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private title: Title,
-    private matSnackBar: MatSnackBar
+    private matSnackBar: MatSnackBar,
+    private changeThemeService: ChangeThemeService
   ) {
     this.title.setTitle("Registro - Mini-Twitter")
 
@@ -62,7 +67,7 @@ export class ProfileComponent implements OnInit {
           this.authModel.description = res.description;
           this.authModel.photoURL = res.photoURL;
           this.authModel.birth = res.birth
-          setTimeout(() => { this.spinnerLoadingPhotoURLProfile = false; }, 2000);
+          setTimeout(() => { this.spinnerLoadingPhotoURLProfile = false; }, 1000);
         },
         err => console.log(err)
       )
@@ -167,6 +172,20 @@ export class ProfileComponent implements OnInit {
 
   }
   // close-snack-bar //
+
+  // open-change-theme-slide-toggle //
+  changeThemeSlideToggle() {
+    if (this.changeThemeSlideToggleBoolean) {
+      this.changeThemeSlideToggleBoolean = false
+      this.changeTextThemeSlideToggle = 'Dark';
+      this.changeThemeService.changeTheme('light-theme')
+    } else {
+      this.changeThemeSlideToggleBoolean = true
+      this.changeTextThemeSlideToggle = 'Light';
+      this.changeThemeService.changeTheme('dark-theme')
+    }
+  }
+  // close-change-theme-slide-toggle //
 
   // --- close-UI --- //
 

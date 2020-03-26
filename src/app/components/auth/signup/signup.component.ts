@@ -20,6 +20,8 @@ import { Auth } from 'src/app/shared/models/auth.model';
 })
 export class SignupComponent implements OnInit {
 
+  showPassword: boolean = false;
+
   minDate: Date;
   maxDate: Date;
 

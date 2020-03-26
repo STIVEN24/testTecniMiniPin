@@ -114,8 +114,11 @@
                 <!-- open-password-field -->
                 <mat-form-field color="primary">
                     <mat-label>Contraseña</mat-label>
-                    <input autocomplete="off" type="password" matInput [formControl]="password"
+                    <input autocomplete="off" [type]="showPassword ? 'text' : 'password' " matInput [formControl]="password"
                         [(ngModel)]="authModel.password">
+                        <button mat-icon-button matSuffix (click)="showPassword = !showPassword">
+                            <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+                        </button>
                     <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
                         Contraseña muy corta,
                     </mat-error>

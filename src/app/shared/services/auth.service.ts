@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
+import { Location } from '@angular/common';
+
 
 // --- open-firebase --- //
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -25,7 +27,8 @@ export class AuthService {
     private angularFireAuth: AngularFireAuth,
     private angularFirestore: AngularFirestore,
     private angularFirStorage: AngularFireStorage,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.userData = angularFireAuth.authState
   }
@@ -94,7 +97,8 @@ export class AuthService {
   // --- close-logout --- //
   logout() {
     this.angularFireAuth.auth.signOut();
-    this.router.navigate(['/auth/login']);
+    this.location.back()
+    // this.router.navigate(['/auth/login']);
   }
   // --- close-logout --- //
 

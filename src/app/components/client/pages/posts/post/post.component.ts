@@ -44,9 +44,13 @@ export class PostComponent implements OnInit {
     this.getCurrentAuth();
     this.initPosts();
 
+    
+
     this.authService.userData.subscribe(
       user => {
-        this.authUserUid = user.uid
+        if (user != null) {
+          this.authUserUid = user.uid
+        }
       }
     )
   }

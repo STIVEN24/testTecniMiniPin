@@ -11,28 +11,32 @@ $custom-typography: mat-typography-config(
 // $button : first parameter: font-size, second parameter: line-height, three parameter: weight
 // close-my-typography --- //
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
+
 @include mat-core($custom-typography);
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-// $candy-app-primary: mat-palette($mat-indigo);
-// $candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
 
-// $candy-app-primary: mat-palette($mat-indigo); original
-$candy-app-primary: mat-palette($mat-light-blue, 500); // customed
-$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$app-light-primary: mat-palette($mat-light-blue, 500); // customed
+$app-light-accent:  mat-palette($mat-pink, A200, A100, A400);
+$app-light-warn:    mat-palette($mat-red);
 
-// The warn palette is optional (defaults to red).
-$candy-app-warn:    mat-palette($mat-red);
+$app-dark-primary: mat-palette($mat-light-blue, 500); // customed
+$app-dark-accent:  mat-palette($mat-pink, A200, A100, A400);
+$app-dark-warn:    mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+$app-light-theme: mat-light-theme($app-light-primary, $app-light-accent, $app-light-warn);
+$app-dark-theme: mat-dark-theme($app-dark-primary, $app-dark-accent, $app-light-warn);
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include angular-material-theme($candy-app-theme);
+@include angular-material-theme($app-light-theme);
+
+.light-theme {
+    @include angular-material-theme($app-light-theme);
+    background: #fff;
+    color: #000
+}
+
+.dark-theme {
+    @include angular-material-theme($app-dark-theme);
+    background: #222;
+    color: #fff
+}

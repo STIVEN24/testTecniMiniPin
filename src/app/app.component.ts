@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { NavigationStart, NavigationEnd, Router, Event } from '@angular/router';
 
-// --- open-services --- /
-// --- close-services --- /
+// --- open-services --- //
+import { ChangeThemeService } from './shared/services/change-theme.service';
+// --- close-services --- //
+
 
 @Component({
   selector: 'app-root',
@@ -11,10 +14,14 @@ import { NavigationStart, NavigationEnd, Router, Event } from '@angular/router';
 })
 export class AppComponent {
 
+  @HostBinding('class') componentCssClass: any;
+
   showSpinnerLoading: boolean;
 
   constructor(
-    private router: Router
+    private router: Router,
+    public overlayContainer: OverlayContainer,
+    private changeThemeService: ChangeThemeService
   ) {
     this.showSpinnerLoading = true;
 
@@ -23,9 +30,18 @@ export class AppComponent {
         this.showSpinnerLoading = true;
       }
       if (routerEvent instanceof NavigationEnd) {
-        this.showSpinnerLoading = false;
+        setTimeout(() => { this.showSpinnerLoading = false }, 500);
       }
     });
+  }
+
+  ngOnInit() {
+    this.changeThemeService.currentTheme.subscribe(d => this.changeTheme(d))
+  }
+
+  changeTheme(e) {
+    this.overlayContainer.getContainerElement().classList.add(e);
+    this.componentCssClass = e
   }
 
 }

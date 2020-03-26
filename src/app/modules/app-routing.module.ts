@@ -39,16 +39,6 @@ const routes: Routes = [
   { path: 'account/profile', component: ProfileComponent, canActivate: [AuthGuard] },
   // close-account //
 
-  // open-posts //
-  {
-    path: '',
-    component: PostComponent,
-    children: [
-      { path: 'post/update/:id_post', component: NewPostComponent }
-    ]
-  },
-  // close-post //
-
   // open-redirect //
   { path: '**', component: NotFoundPageComponent }
   // close-redirect //

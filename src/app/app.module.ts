@@ -51,6 +51,9 @@ import { environment } from 'src/environments/environment';
 import { NotFoundPageComponent } from './components/client/pages/not-found-page/not-found-page.component';
 // --- close-others --- //
 
+
+import { ChangeThemeService } from './shared/services/change-theme.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,6 +104,7 @@ import { NotFoundPageComponent } from './components/client/pages/not-found-page/
     SnackBarComponent
   ],
   providers: [
+    ChangeThemeService
   ],
   bootstrap: [AppComponent]
 })

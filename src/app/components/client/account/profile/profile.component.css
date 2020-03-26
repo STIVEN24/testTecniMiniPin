@@ -1,6 +1,8 @@
 .content {
-    margin-top: 10em;
     position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
 }
 
 .content form {
@@ -8,11 +10,11 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin-top: 10em;
 }
 
 .content form .form-fields-profile {
-    padding-top: 10em;
-    width: 500px;
+    margin-top: 10em;
 }
 
 .img-profile-pic-svg {
@@ -77,3 +79,9 @@
 }
 
 /* --- close-spinner-profile --- */
+
+/* --- open-mat-divider --- */
+mat-divider {
+    margin: 3em 0
+}
+/* --- close-mat-divider --- */

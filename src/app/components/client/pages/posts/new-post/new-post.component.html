@@ -1,13 +1,13 @@
-<mat-card >
+<mat-card>
 
     <form>
 
         <div class="mat-card-img">
-            <img *ngIf="photoURL != ''" mat-card-avatar mat-card-sm-image [ngStyle]=" { 
+            <img *ngIf="photoURL != undefined " mat-card-avatar mat-card-sm-image [ngStyle]=" { 
                 'background-image': 'url('+ photoURL +')',
                 'background-size': 'cover', 'background-position' : 'center'  } ">
-    
-            <div *ngIf="photoURL == ''" mat-card-avatar mat-card-sm-image>
+
+            <div *ngIf="photoURL == undefined " mat-card-avatar mat-card-sm-image>
                 <svg id="457bf273-24a3-4fd8-a857-e9b918267d6a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" width="698" height="698" viewBox="0 0 698 698">
                     <defs>
@@ -52,9 +52,10 @@
         <!-- open-description-field -->
         <mat-form-field>
             <mat-label>
-                {{ isAuth ? 'Piensas en algo '+name+'?, ¡postéalo!.' : 'Piensas en algo?, ¡Registrate!.'  }}
+                {{ isAuth ? 'Piensas en algo '+name+'?, ¡postéalo!.' : 'Piensas en algo?, ¡Registrate y postéalo!.'  }}
             </mat-label>
-            <textarea type="text" matInput [(ngModel)]="postModel.description" name="description"></textarea>
+            <textarea type="text" matInput [(ngModel)]="postModel.description" name="description" cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="7"></textarea>
         </mat-form-field>
         <!-- close-description-field -->
 
