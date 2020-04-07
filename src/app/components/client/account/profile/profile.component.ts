@@ -53,9 +53,11 @@ export class ProfileComponent implements OnInit {
     this.title.setTitle("Registro - Mini-Twitter")
 
     this.spinnerLoadingPhotoURLProfile = true
+    
   }
 
   ngOnInit() {
+    
     this.authService.userData.subscribe(user => {
       this.uid = user.uid
 
@@ -79,42 +81,19 @@ export class ProfileComponent implements OnInit {
   // open-eclaring-fields //
   name = new FormControl('', [Validators.required, Validators.minLength(3)]);
   lastname = new FormControl('', [Validators.required]);
-  email = new FormControl('', [Validators.required, Validators.email]);
+  email = new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email]);
   description = new FormControl('');
   birth = new FormControl('');
   // close-declaring-fields //
 
-  // open-update-profile //
-  // update() {
-  //   this.authService.preUpdateProfile(this.authModel, this.image);
-  // }
-  // close-update-profile //
+  // --- open-update-profile --- //
+  updateProfile() {
 
-  // --- open-init-load-form-profile ---
-  // private initFormForUpdate(user) {
-  //   if (user.photoURL) {
-  //     this.booleanImgProfileValidate = true;
-  //     this.currentImage = user.photoURL
-
-  //   } else {
-  //     this.booleanImgProfileValidate = false;
-  //   }
-  //   console.log(user.photoURL)
-
-  //   this.authModel.email = user.email;
-  //   this.authService.getUser(user.uid).then(
-  //     (res: any) => {
-  //       this.authModel.name = res.name;
-  //       this.authModel.lastname = res.lastname;
-  //       this.authModel.birth = res.birth;
-  //       this.authModel.photoURL = res.photoURL;
-  //       this.authModel.description = res.description;
-  //     })
-  //     .catch(err => console.log(err));
-  // }
-  // --- close-init-load-form-profile ---
-
-
+    this.authService.updateProfile(this.uid, this.authModel)
+    .then(res => this.showSnackBar('Tu perfil ha sido actualizado'))
+    .catch(err => console.log(err))
+  }
+  // --- close-update-profile --- //
 
   // --- open-upload-img --- //
   handleImage(photoURL: File): void {
@@ -157,10 +136,7 @@ export class ProfileComponent implements OnInit {
   // --- close-function-validate-img ---//
 
 
-
-
-
-
+  
   // --- open-UI --- //
 
   // open-snack-bar //
